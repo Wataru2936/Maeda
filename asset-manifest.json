@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Maeda/static/css/main.7f8739e5.css",
+    "main.js": "/Maeda/static/js/main.65103649.js",
+    "static/js/453.afea0664.chunk.js": "/Maeda/static/js/453.afea0664.chunk.js",
+    "index.html": "/Maeda/index.html",
+    "main.7f8739e5.css.map": "/Maeda/static/css/main.7f8739e5.css.map",
+    "main.65103649.js.map": "/Maeda/static/js/main.65103649.js.map",
+    "453.afea0664.chunk.js.map": "/Maeda/static/js/453.afea0664.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f8739e5.css",
+    "static/js/main.65103649.js"
+  ]
+}
