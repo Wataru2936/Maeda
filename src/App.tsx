@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
+import maedaImage from './maeda.jpg';  // 画像をインポート
 
 // ドリンクデータの型定義
 interface Drink {
@@ -93,7 +94,7 @@ function App() {
               </button>
             )}
             <div className={`maeda-image ${isSpinning ? 'shaking' : ''}`}>
-              <img src="/maeda.jpg" alt="前田さん" />
+              <img src={maedaImage} alt="前田さん" />
             </div>
             {isSpinning && (
               <div className="spinning-animation">
