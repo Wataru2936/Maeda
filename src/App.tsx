@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import maedaImage from './maeda.jpg';  // 画像をインポート
 
@@ -69,16 +69,37 @@ function App() {
   const [selectedDrink, setSelectedDrink] = useState<Drink | null>(null);
   const [imageLoading, setImageLoading] = useState(true);
   const [imageError, setImageError] = useState(false);
+  
+  // 音声の参照を作成
+  const spinningSound = useRef<HTMLAudioElement | null>(null);
+  const resultSound = useRef<HTMLAudioElement | null>(null);
 
   const startRoulette = () => {
     setIsSpinning(true);
     setSelectedDrink(null);
+    
+    // スピン音を再生
+    if (spinningSound.current) {
+      spinningSound.current.currentTime = 0;
+      spinningSound.current.play();
+    }
     
     // 3秒後に結果を表示
     setTimeout(() => {
       const randomIndex = Math.floor(Math.random() * drinks.length);
       setSelectedDrink(drinks[randomIndex]);
       setIsSpinning(false);
+      
+      // スピン音を停止
+      if (spinningSound.current) {
+        spinningSound.current.pause();
+      }
+      
+      // 結果音を再生
+      if (resultSound.current) {
+        resultSound.current.currentTime = 0;
+        resultSound.current.play();
+      }
     }, 3000);
   };
 
@@ -110,7 +131,7 @@ function App() {
 
         {selectedDrink && (
           <div className="result">
-            <h3>結果発表！</h3>
+            <h3>{selectedDrink.displayName}</h3>
             <div className={`drink-image ${imageLoading ? 'loading' : ''} ${imageError ? 'error' : ''}`}>
               <img
                 src={`${process.env.PUBLIC_URL}/${selectedDrink.image}`}
@@ -122,7 +143,6 @@ function App() {
                 }}
               />
             </div>
-            <p>{selectedDrink.displayName}を飲みましょう！</p>
             <p>{selectedDrink.description}</p>
             <button className="restart-button" onClick={startRoulette}>
               もう一度筋肉に聞く
@@ -130,6 +150,10 @@ function App() {
           </div>
         )}
       </main>
+
+      {/* 音声ファイル */}
+      <audio ref={spinningSound} src={`${process.env.PUBLIC_URL}/spinning.mp3`} />
+      <audio ref={resultSound} src={`${process.env.PUBLIC_URL}/result.mp3`} />
     </div>
   );
 }
