@@ -175,6 +175,9 @@
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .drink-image img {
@@ -183,8 +186,20 @@
   object-fit: cover;
   display: block;
   transition: transform 0.3s ease;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .drink-image img:hover {
   transform: scale(1.05);
+}
+
+/* 画像の読み込み中のスタイル */
+.drink-image.loading {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 画像の読み込みエラー時のスタイル */
+.drink-image.error {
+  background-color: rgba(255, 0, 0, 0.1);
 }

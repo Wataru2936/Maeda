@@ -67,6 +67,8 @@ const drinks: Drink[] = [
 function App() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [selectedDrink, setSelectedDrink] = useState<Drink | null>(null);
+  const [imageLoading, setImageLoading] = useState(true);
+  const [imageError, setImageError] = useState(false);
 
   const startRoulette = () => {
     setIsSpinning(true);
@@ -108,10 +110,19 @@ function App() {
 
         {selectedDrink && (
           <div className="result">
-            <div className="drink-image">
-              <img src={`${process.env.PUBLIC_URL}/${selectedDrink.image}`} alt={selectedDrink.displayName} />
+            <h3>結果発表！</h3>
+            <div className={`drink-image ${imageLoading ? 'loading' : ''} ${imageError ? 'error' : ''}`}>
+              <img
+                src={`${process.env.PUBLIC_URL}/${selectedDrink.image}`}
+                alt={selectedDrink.displayName}
+                onLoad={() => setImageLoading(false)}
+                onError={() => {
+                  setImageLoading(false);
+                  setImageError(true);
+                }}
+              />
             </div>
-            <h3>{selectedDrink.displayName}</h3>
+            <p>{selectedDrink.displayName}を飲みましょう！</p>
             <p>{selectedDrink.description}</p>
             <button className="restart-button" onClick={startRoulette}>
               もう一度筋肉に聞く
