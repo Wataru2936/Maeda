@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/Maeda/static/css/main.7f8739e5.css",
-    "main.js": "/Maeda/static/js/main.b3fb71b7.js",
+    "main.css": "/Maeda/static/css/main.8f01539e.css",
+    "main.js": "/Maeda/static/js/main.cf3154fc.js",
     "static/js/453.afea0664.chunk.js": "/Maeda/static/js/453.afea0664.chunk.js",
     "static/media/maeda.jpg": "/Maeda/static/media/maeda.402db3cdecac3e394d15.jpg",
     "index.html": "/Maeda/index.html",
-    "main.7f8739e5.css.map": "/Maeda/static/css/main.7f8739e5.css.map",
-    "main.b3fb71b7.js.map": "/Maeda/static/js/main.b3fb71b7.js.map",
+    "main.8f01539e.css.map": "/Maeda/static/css/main.8f01539e.css.map",
+    "main.cf3154fc.js.map": "/Maeda/static/js/main.cf3154fc.js.map",
     "453.afea0664.chunk.js.map": "/Maeda/static/js/453.afea0664.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7f8739e5.css",
-    "static/js/main.b3fb71b7.js"
+    "static/css/main.8f01539e.css",
+    "static/js/main.cf3154fc.js"
   ]
 }
