@@ -1,24 +1,118 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
+// ドリンクデータの型定義
+interface Drink {
+  id: number;
+  displayName: string;
+  actualDrink: string;
+  description: string;
+}
+
+// ドリンクデータ
+const drinks: Drink[] = [
+  {
+    id: 1,
+    displayName: "雇用契約ハイボール",
+    actualDrink: "ハイボール",
+    description: "契約内容に忠実なすっきりドリンク。飲みすぎ注意。"
+  },
+  {
+    id: 2,
+    displayName: "労基レッドワイン",
+    actualDrink: "赤ワイン",
+    description: "渋みと厳格さのある味。労働時間に配慮を。"
+  },
+  {
+    id: 3,
+    displayName: "年金ホワイトワイン",
+    actualDrink: "白ワイン",
+    description: "穏やかな甘みと安心感。未来への備え。"
+  },
+  {
+    id: 4,
+    displayName: "社保焼酎",
+    actualDrink: "焼酎",
+    description: "社会保険のようにじわじわ効く。"
+  },
+  {
+    id: 5,
+    displayName: "退職届 純米酒",
+    actualDrink: "日本酒",
+    description: "飲み切った先に新たな人生が待つ一杯。"
+  },
+  {
+    id: 6,
+    displayName: "解雇通告テキーラ",
+    actualDrink: "テキーラ",
+    description: "一撃必殺のショット。飲む前に退路の確認を。"
+  },
+  {
+    id: 7,
+    displayName: "就業規則ロック",
+    actualDrink: "ウイスキーロック",
+    description: "規則に厳格なストレートな一杯。"
+  },
+  {
+    id: 8,
+    displayName: "育休スムージー",
+    actualDrink: "ノンアル",
+    description: "優しい休息。家族の時間を大切に。"
+  }
+];
+
 function App() {
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [selectedDrink, setSelectedDrink] = useState<Drink | null>(null);
+
+  const startRoulette = () => {
+    setIsSpinning(true);
+    setSelectedDrink(null);
+    
+    // 3秒後に結果を表示
+    setTimeout(() => {
+      const randomIndex = Math.floor(Math.random() * drinks.length);
+      setSelectedDrink(drinks[randomIndex]);
+      setIsSpinning(false);
+    }, 3000);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>前田マッスルオーダー</h1>
+        <h2>～次の一杯は筋肉が決める！～</h2>
       </header>
+
+      <main>
+        {!selectedDrink && (
+          <div className="start-section">
+            {!isSpinning && (
+              <button className="start-button" onClick={startRoulette}>
+                筋肉ルーレット開始
+              </button>
+            )}
+            <div className={`maeda-image ${isSpinning ? 'shaking' : ''}`}>
+              <img src="/maeda.jpg" alt="前田さん" />
+            </div>
+            {isSpinning && (
+              <div className="spinning-animation">
+                <p>筋肉が選んでいます...</p>
+              </div>
+            )}
+          </div>
+        )}
+
+        {selectedDrink && (
+          <div className="result">
+            <h3>{selectedDrink.displayName}</h3>
+            <p>{selectedDrink.description}</p>
+            <button className="restart-button" onClick={startRoulette}>
+              もう一度筋肉に聞く
+            </button>
+          </div>
+        )}
+      </main>
     </div>
   );
 }
